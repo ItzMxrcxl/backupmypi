@@ -52,6 +52,7 @@ backup() (
 
 shrink() ( #Shrinking the image file to a realisable filesize
 	echo "Zipping backup file to shrink filesize"
+	BACKUP_USEDSPACE=$`du --apparent-size $backup_file`
 	gzip $backup_file
 	
 )
