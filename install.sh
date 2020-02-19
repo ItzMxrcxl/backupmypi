@@ -15,7 +15,7 @@ echo "Before installing we make some Updates..."
 apt update -y && apt upgrade -y
 echo "Installing dependent Packages" #Begin Installation
 apt install -y git rsync gzip
-if "/usr/bin/backupmypi" ; then
+if [[ /usr/bin/backupmypi ]] ; then
 	echo "Program already installed!"
 	if "/usr/bin/backupmypi/updater.sh" ; then
 		echo "Running updater"
@@ -26,15 +26,20 @@ if "/usr/bin/backupmypi" ; then
 else
 	echo "Copy files..." 
 	if [[ ! /usr/bin ]]; then
+		echo "Created folder /usr/bin/"
 		mkdir /usr/bin/
-	fi	
-	mkdir /usr/bin/backupmypi/
+	fi
+	if [[ ! /usr/bin/backupmypi/ ]]; then
+		echo "Created folder /usr/bin/backupmypi/"
+		mkdir /usr/bin/backupmypi/
+	fi
 	cp ressources/usr/bin/backupmypi/* /usr/bin/backupmypi/
 	cp ressources/bin/* /bin/
 	if [[ /usr/bin/backupmypi/config.txt ]]; then
-		echo -e "${RED} WARNING: "
-		cp /usr/bin/backupmypi/config.txt /usr/bin/backupmypi/config.txt.bak
-		# cp /usr/bin/backupmypi/config.txt.sample /usr/bin/backupmypi/config.txt
+		echo -e "${RED} WARNING: new config file has been added, please check configuration!"
+		cp /usr/bin/backupmypi/config.txt.sample /usr/bin/backupmypi/config.txt
+		# cp /usr/bin/backupmypi/config.txt /usr/bin/backupmypi/config.txt.bak
+		# echo "a backup of the configuration has been created. /usr/bin/backupmypi/config.txt"
 	fi
 	if [[ ! /usr/bin/backupmypi/config.txt ]]; then
 		cp /usr/bin/backupmypi/config.txt.sample /usr/bin/backupmypi/config.txt
