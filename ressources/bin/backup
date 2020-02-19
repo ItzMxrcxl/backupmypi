@@ -1,0 +1,5 @@
+#!/bin/bash
+# Author: Marcel Kallinger https://github.com/ItzMxrcxl
+# Open Source BackupMyPi Script
+
+bash /usr/bin/backupmypi/main.sh

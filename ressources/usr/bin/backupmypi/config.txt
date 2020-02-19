@@ -1,0 +1,2 @@
+#Example
+backup_path=/mnt/backup/PiBackup
