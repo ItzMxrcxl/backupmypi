@@ -52,7 +52,7 @@ else
       git clone "https://github.com/$githubUserName/$repositoryName" || { echo "Couldn't download latest version" ; return 1; }
       cd $repositoryName ||  { echo 'Update Failed' ; return 1 ;}
       git checkout "v$latestVersion" 2> /dev/null || git checkout "$latestVersion" 2> /dev/null || echo "Couldn't git checkout to stable release, updating to latest commit."
-      #chmod a+x install.sh #this might be necessary in your case but wasnt in mine.
+      chmod a+x install.sh
       "./$nameOfInstallFile" || return 1 # could echo error here about sudo but I assume you handle errors in your own script correctly
       cd ..
       rm -r -f $repositoryName || { echo "Error: successfully updated but couldn't delete temperary files at ~/$repositoryName"; return 1; }
