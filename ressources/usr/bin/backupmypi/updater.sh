@@ -1,3 +1,4 @@
+#!/bin/bash
 SCRIPT="backupmypi"
 SCRIPTPATH="/usr/bin/backupmypi/temp"
 SCRIPTNAME="install.sh"
@@ -7,7 +8,6 @@ BRANCH="master"
 self_update() {
     cd $SCRIPTPATH
     git fetch
-
     [ -n $(git diff --name-only origin/$BRANCH | grep $SCRIPTNAME) ] && {
         echo "Found updates for the Script..."
 		mkdir $SCRIPTPATH
@@ -20,3 +20,5 @@ self_update() {
     }
     echo "Script up to date."
 }
+
+self_update
