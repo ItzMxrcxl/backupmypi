@@ -31,7 +31,17 @@ else
 	mkdir /usr/bin/backupmypi/
 	cp ressources/usr/bin/backupmypi/* /usr/bin/backupmypi/
 	cp ressources/bin/* /bin/
+	if [[ /usr/bin/backupmypi/config.txt ]]; then
+		echo -e "${RED} WARNING: "
+		cp /usr/bin/backupmypi/config.txt /usr/bin/backupmypi/config.txt.bak
+		# cp /usr/bin/backupmypi/config.txt.sample /usr/bin/backupmypi/config.txt
+	fi
+	if [[ ! /usr/bin/backupmypi/config.txt ]]; then
+		cp /usr/bin/backupmypi/config.txt.sample /usr/bin/backupmypi/config.txt
+	fi
 	echo "set file permissions"
+	chown pi:pi /usr/bin/backupmypi #Give folder to user Pi
+	chmod 770 /usr/bin/backupmypi
 	chmod +x /bin/backup
 	chmod +x /usr/bin/backupmypi/*
 	echo "finish."

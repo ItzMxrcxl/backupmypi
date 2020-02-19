@@ -6,30 +6,32 @@ VERSION="1.0"
 . /usr/bin/backupmypi/config.txt
 
 SCRIPT="backupmypi"
-SCRIPTPATH="/usr/bin/backupmypi/temp"
-SCRIPTNAME="install.sh"
+SCRIPTPATH="/usr/bin/backupmypi/"
 ARGS="$@"
-BRANCH="ItzMxrcxl"
+BRANCH="master"
 
 DATE=$(date '+%Y-%m-%d_%H-%M-%S')
 
 #For logging
 exec 3>&1 4>&2
 trap 'exec 2>&4 1>&3' 0 1 2 3
+touch /tmp/bmp_$DATE.log
 exec 1>/tmp/bmp_$DATE.log 2>&1
 
 self_update() {
-    cd $SCRIPTPATH
+	if [[ ! $SCRIPTPATH/temp ]]; then
+		mkdir $SCRIPTPATH/temp
+	fi
+    cd $SCRIPTPATH/temp
     git fetch
 
-    [ -n $(git diff --name-only origin/$BRANCH | grep $SCRIPTNAME) ] && {
+    [ -n $(git diff --name-only origin/$BRANCH | grep backupmypi) ] && {
         echo "Found updates for the Script..."
-		mkdir $SCRIPTPATH
         git pull --force
         git checkout $BRANCH
         git pull --force
         echo "Start install new Version..."
-        exec "$SCRIPTNAME" "$@"
+        exec install.sh
         exit 100
     }
     echo "Script up to date."

@@ -2,7 +2,7 @@ SCRIPT="backupmypi"
 SCRIPTPATH="/usr/bin/backupmypi/temp"
 SCRIPTNAME="install.sh"
 ARGS="$@"
-BRANCH="ItzMxrcxl"
+BRANCH="master"
 
 self_update() {
     cd $SCRIPTPATH
