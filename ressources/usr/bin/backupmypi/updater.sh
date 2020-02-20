@@ -9,7 +9,7 @@ self_update() {
 	fi
     cd /usr/bin/backupmypi/temp
 	echo "Checking version files..."
-    GITHUB_VERSION=`curl -o - https://raw.githubusercontent.com/ItzMxrcxl/backupmypi/master/ressources/usr/bin/backupmypi/version`
+    GITHUB_VERSION=`curl -H 'Cache-Control: no-cache' -o - https://raw.githubusercontent.com/ItzMxrcxl/backupmypi/master/ressources/usr/bin/backupmypi/version`
 	LOCAL_VERSION=`cat /usr/bin/backupmypi/version`
 	
     if [[ ! GITHUB_VERSION = LOCAL_VERSION ]]; then
