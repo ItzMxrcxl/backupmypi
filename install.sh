@@ -20,7 +20,6 @@ if [[ -d "/usr/bin/backupmypi" ]] ; then
 	LOCAL_VERSION=`cat /usr/bin/backupmypi/version`
 	if [[ ! GITHUB_VERSION = LOCAL_VERSION ]]; then
 		echo "Updating..."
-		pass
 	else
 		echo "Program already installed!"
 		if [[ -d "/usr/bin/backupmypi/updater.sh" ]] ; then
@@ -44,7 +43,7 @@ fi
 cp ressources/usr/bin/backupmypi/* /usr/bin/backupmypi/
 cp ressources/bin/* /bin/
 if [[ -f "/usr/bin/backupmypi/config.txt" ]]; then
-	echo -e '${RED} WARNING: new config file has been added, please check configuration!'
+	echo -e 'WARNING: new config file has been added, please check configuration!'
 	cp /usr/bin/backupmypi/config.txt /usr/bin/backupmypi/config.txt.bak
 	cp /usr/bin/backupmypi/config.txt.sample /usr/bin/backupmypi/config.txt
 	# echo "a backup of the configuration has been created. /usr/bin/backupmypi/config.txt"
@@ -58,5 +57,5 @@ chmod 770 /usr/bin/backupmypi
 chmod +x /bin/backup
 chmod +x /usr/bin/backupmypi/*
 echo "finish."
-echo -e '${RED} please edit the configuration!'
+echo -e 'please edit the configuration!'
 echo "nano /usr/bin/backupmypi/config.txt"
