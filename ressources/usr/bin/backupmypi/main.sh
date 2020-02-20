@@ -42,8 +42,9 @@ backup() (
 	a=$SECONDS #Start the second timer
 	echo "Started backup at " + $DATE_STARTED
 	backup_file=$backup_path + "/" + $DATE_STARTED + ".img" #the filename
-	
-	dd if=/dev/mmcblk0 of=$backup_file status=progress
+	BOOT=`awk '$2 == "/"' /proc/self/mounts | sed 's/\s.*$//'`
+	echo "Create backup from device $BOOT"
+	dd if=$BOOT of=$backup_file status=progress
 	if $shrink_image = True ; then
 		shrink
 	fi
