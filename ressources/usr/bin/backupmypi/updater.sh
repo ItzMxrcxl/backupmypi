@@ -8,6 +8,7 @@ self_update() {
 		mkdir /usr/bin/backupmypi/temp
 	fi
     cd /usr/bin/backupmypi/temp
+	echo "Checking version files..."
     GITHUB_VERSION=`curl -o - https://raw.githubusercontent.com/ItzMxrcxl/backupmypi/master/ressources/usr/bin/backupmypi/version`
 	LOCAL_VERSION=`cat /usr/bin/backupmypi/version`
 	
