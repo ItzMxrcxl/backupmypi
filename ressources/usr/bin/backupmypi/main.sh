@@ -41,11 +41,11 @@ backup() (
 	DATE_STARTED=$(date '+%Y-%m-%d_%H-%M-%S')
 	a=$SECONDS #Start the second timer
 	echo "Started backup at " + $DATE_STARTED
-	backup_file=$backup_path + "/" + $DATE_STARTED + ".img" #the filename
+	backup_file=$backup_path "/" $DATE_STARTED ".img" #the filename
 	BOOT=`awk '$2 == "/"' /proc/self/mounts | sed 's/\s.*$//'`
 	echo "Create backup from device $BOOT"
-	dd if=$BOOT of=$backup_file status=progress
-	if $shrink_image = True ; then
+	sudo dd if=$BOOT of=$backup_file status=progress
+	if $shrink_image = 'True' ; then
 		shrink
 	fi
 )
@@ -54,7 +54,6 @@ shrink() ( #Shrinking the image file to a realisable filesize
 	echo "Zipping backup file to shrink filesize"
 	BACKUP_USEDSPACE=$`du --apparent-size $backup_file`
 	gzip $backup_file
-	
 )
 
 output() (
