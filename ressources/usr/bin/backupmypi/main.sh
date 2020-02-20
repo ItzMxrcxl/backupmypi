@@ -2,13 +2,7 @@
 # Author: Marcel Kallinger https://github.com/ItzMxrcxl
 # Open Source BackupMyPi Script
 
-VERSION="1.0"
 . /usr/bin/backupmypi/config.txt
-
-SCRIPT="backupmypi"
-SCRIPTPATH="/usr/bin/backupmypi/"
-ARGS="$@"
-BRANCH="master"
 
 DATE=$(date '+%Y-%m-%d_%H-%M-%S')
 
@@ -19,22 +13,24 @@ touch /tmp/bmp_$DATE.log
 exec 1>/tmp/bmp_$DATE.log 2>&1
 
 self_update() {
-	if [[ ! $SCRIPTPATH/temp ]]; then
-		mkdir $SCRIPTPATH/temp
+	if [[ ! /usr/bin/backupmypi/temp ]]; then
+		mkdir /usr/bin/backupmypi/temp
 	fi
-    cd $SCRIPTPATH/temp
-    git fetch
-
-    [ -n $(git diff --name-only origin/$BRANCH | grep backupmypi) ] && {
+    cd /usr/bin/backupmypi/temp
+    GITHUB_VERSION=`curl -o - https://raw.githubusercontent.com/ItzMxrcxl/backupmypi/master/ressources/usr/bin/backupmypi/version`
+	LOCAL_VERSION=`cat /usr/bin/backupmypi/version`
+	
+    if [[ ! GITHUB_VERSION = LOCAL_VERSION ]]; then
         echo "Found updates for the Script..."
-        git pull --force
-        git checkout $BRANCH
-        git pull --force
+        git clone https://github.com/ItzMxrcxl/backupmypi.git
         echo "Start install new Version..."
+		cd backupmypi
+		chmod +x install.sh
         exec install.sh
         exit 100
-    }
-    echo "Script up to date."
+	else
+		echo "Script up to date."
+	fi
 }
 
 main() ( #if you wana build a part in it, before the backup wil be executed.
@@ -47,7 +43,7 @@ backup() (
 	backup_file=$backup_path + "/" + $DATE_STARTED + ".img" #the filename
 	
 	dd if=/dev/mmcblk0 of=$backup_file status=progress
-	if $shrink = False ; then
+	if $shrink_image = True ; then
 		shrink
 	fi
 )

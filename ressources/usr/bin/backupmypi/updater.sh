@@ -1,24 +1,26 @@
 #!/bin/bash
-SCRIPT="backupmypi"
-SCRIPTPATH="/usr/bin/backupmypi/temp"
-SCRIPTNAME="install.sh"
-ARGS="$@"
-BRANCH="master"
+# Author: Marcel Kallinger https://github.com/ItzMxrcxl
+# Part of the Open Source BackupMyPi Script
+# Automatic Update Script
 
 self_update() {
-    cd $SCRIPTPATH
-    git fetch
-    [ -n $(git diff --name-only origin/$BRANCH | grep $SCRIPTNAME) ] && {
+	if [[ ! /usr/bin/backupmypi/temp ]]; then
+		mkdir /usr/bin/backupmypi/temp
+	fi
+    cd /usr/bin/backupmypi/temp
+    GITHUB_VERSION=`curl -o - https://raw.githubusercontent.com/ItzMxrcxl/backupmypi/master/ressources/usr/bin/backupmypi/version`
+	LOCAL_VERSION=`cat /usr/bin/backupmypi/version`
+	
+    if [[ ! GITHUB_VERSION = LOCAL_VERSION ]]; then
         echo "Found updates for the Script..."
-		mkdir $SCRIPTPATH
-        git pull --force
-        git checkout $BRANCH
-        git pull --force
+        git clone https://github.com/ItzMxrcxl/backupmypi.git
         echo "Start install new Version..."
-        exec "$SCRIPTNAME" "$@"
+		cd backupmypi
+		chmod +x install.sh
+        exec install.sh
         exit 100
-    }
-    echo "Script up to date."
+	else
+		echo "Script up to date."
+	fi
 }
-
 self_update

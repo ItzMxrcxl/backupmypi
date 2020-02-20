@@ -1,1 +1,2 @@
 backup_path=/mnt/backup/PiBackup
+shrink_image=True
