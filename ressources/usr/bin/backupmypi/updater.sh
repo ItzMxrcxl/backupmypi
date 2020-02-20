@@ -17,8 +17,8 @@ self_update() {
         git clone https://github.com/ItzMxrcxl/backupmypi.git
         echo "Start install new Version..."
 		cd backupmypi
-		chmod +x install.sh
-        exec install.sh
+		chmod a+x install.sh
+        bash install.sh
         exit 100
 	else
 		echo "Script up to date."
