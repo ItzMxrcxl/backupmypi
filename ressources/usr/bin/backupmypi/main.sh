@@ -13,7 +13,8 @@ touch /tmp/bmp_$DATE.log
 exec 1>/tmp/bmp_$DATE.log 2>&1
 
 self_update() {
-	if [[ ! /usr/bin/backupmypi/temp ]]; then
+	if [[ ! -d /usr/bin/backupmypi/temp ]]; then
+		echo "Temp directory doesn't exist"
 		mkdir /usr/bin/backupmypi/temp
 	fi
     cd /usr/bin/backupmypi/temp
