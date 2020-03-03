@@ -10,17 +10,14 @@ then #otherwise arg=argument
   arg=$1
 fi
 
-while [ -n "$arg" ]; do
-
-	case "$arg" in
-
+case "$arg" in
 	--update) bash /usr/bin/backupmypi/updater.sh ;;
 	--force-update) bash /usr/bin/backupmypi/updater.sh -force ;;
 	-u) bash /usr/bin/backupmypi/updater.sh ;;
 
 	-help) echo """
-~~~~~~~~~~~~~~~~~~~~~~~~~BackupMyPi~~~~~~~~~~~~~~~~~~~~~~~~~
-ussage:
+	~~~~~~~~~~~~~~~~~~~~~~~~~BackupMyPi~~~~~~~~~~~~~~~~~~~~~~~~~
+	ussage:
 	Normal ussage
 		Give the script no parameter and it will continue in normal mode.
 	Update:
@@ -31,8 +28,7 @@ ussage:
 			Force a Update
 	-help
 		Show this dialoge
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""" ;;
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""" ;;
 
 	*) bash /usr/bin/backupmypi/main.sh ;;
-	esac
-done
+esac
