@@ -22,7 +22,7 @@ ussage:
 		Show this dialoge""";;
 
 	*) bash /usr/bin/backupmypi/main.sh ;;
-
+	 ) bash /usr/bin/backupmypi/main.sh ;;
 	esac
 
 	shift
