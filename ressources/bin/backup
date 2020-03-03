@@ -5,7 +5,7 @@ while [ -n "$1" ]; do
 
 	case "$1" in
 
-	--update) echo "-a option passed" ;;
+	--update) bash /usr/bin/backupmypi/updater.sh ;;
 
 	-u) bash /usr/bin/backupmypi/updater.sh ;;
 
