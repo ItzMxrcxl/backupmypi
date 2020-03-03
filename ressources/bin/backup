@@ -10,9 +10,9 @@ then #otherwise arg=argument
   arg=$1
 fi
 
-while [ -n "$1" ]; do
+while [ -n "$arg" ]; do
 
-	case "$1" in
+	case "$arg" in
 
 	--update) bash /usr/bin/backupmypi/updater.sh ;;
 	--force-update) bash /usr/bin/backupmypi/updater.sh -force ;;

@@ -48,9 +48,17 @@ force_update() {
 	sudo rm -r /usr/bin/backupmypi/temp
 	exit 0
 }
-while [ -n "$1" ]; do
+if [ -z $1 ] #if no argument is given set arg normal (*)
+then
+  arg="normal"
+elif [ -n $1 ]
+then #otherwise arg=argument
+  arg=$1
+fi
 
-	case "$1" in
+while [ -n "$arg" ]; do
+
+	case "$arg" in
 	-force) force_update ;;
 	-update) self_update ;;
 	*) self_update ;;
