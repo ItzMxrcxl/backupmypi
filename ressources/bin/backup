@@ -25,7 +25,6 @@ ussage:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""";;
 
 	*) bash /usr/bin/backupmypi/main.sh ;;
-	 ) bash /usr/bin/backupmypi/main.sh ;;
 	esac
 
 	shift
