@@ -10,11 +10,16 @@ then #otherwise arg=argument
   arg=$1
 fi
 
+show_version() (
+	LOCAL_VERSION=`cat /usr/bin/backupmypi/version`
+	echo "BackupMyPi v"LOCAL_VERSION" (c)2020"
+)
+
 case "$arg" in
 	--update) bash /usr/bin/backupmypi/updater.sh ;;
 	--force-update) bash /usr/bin/backupmypi/updater.sh -force ;;
 	-u) bash /usr/bin/backupmypi/updater.sh ;;
-
+	-v) show_version ;;
 	-help) echo """
 	~~~~~~~~~~~~~~~~~~~~~~~~~BackupMyPi~~~~~~~~~~~~~~~~~~~~~~~~~
 	ussage:
