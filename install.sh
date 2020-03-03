@@ -1,6 +1,6 @@
 #!/bin/bash
 # Author: Marcel Kallinger https://github.com/ItzMxrcxl
-# Open Source BackupMyPi Script
+# BackupMyPi Script
 
 if [ "$EUID" -ne 0 ]
   then echo "Please run as root" && echo "sudo install.sh"

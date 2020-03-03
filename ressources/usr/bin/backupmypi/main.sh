@@ -1,6 +1,6 @@
 #!/bin/bash
 # Author: Marcel Kallinger https://github.com/ItzMxrcxl
-# Open Source BackupMyPi Script
+# BackupMyPi Script
 
 . /usr/bin/backupmypi/config.txt
 

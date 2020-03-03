@@ -1,6 +1,15 @@
 #!/bin/bash
 # Author: Marcel Kallinger https://github.com/ItzMxrcxl
-# Open Source BackupMyPi Script
+# BackupMyPi Script
+
+if [ -z $1 ] #if no argument is given set arg normal (*)
+then
+  arg="normal"
+elif [ -n $1 ]
+then #otherwise arg=argument
+  arg=$1
+fi
+
 while [ -n "$1" ]; do
 
 	case "$1" in

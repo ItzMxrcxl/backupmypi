@@ -1,6 +1,6 @@
 #!/bin/bash
 # Author: Marcel Kallinger https://github.com/ItzMxrcxl
-# Part of the Open Source BackupMyPi Script
+# Part of the BackupMyPi Project
 # Automatic Update Script
 echo "~~~~~~~~~~~~~~~~BackupMyPi - Updater~~~~~~~~~~~~~~~~"
 echo "Author: Marcel Kallinger"
