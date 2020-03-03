@@ -21,19 +21,19 @@ case "$arg" in
 	-u) bash /usr/bin/backupmypi/updater.sh ;;
 	-v) show_version ;;
 	-help) echo """
-	~~~~~~~~~~~~~~~~~~~~~~~~~BackupMyPi~~~~~~~~~~~~~~~~~~~~~~~~~
-	ussage:
-	Normal ussage
-		Give the script no parameter and it will continue in normal mode.
-	Update:
-		-u
-		--update
-			Check for Updates
-		--force-update
-			Force a Update
-	-help
-		Show this dialoge
-	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""" ;;
+~~~~~~~~~~~~~~~~~~~~~~~~~BackupMyPi~~~~~~~~~~~~~~~~~~~~~~~~~
+ussage:
+Normal ussage
+	Give the script no parameter and it will continue in normal mode.
+Update:
+	-u
+	--update
+		Check for Updates
+	--force-update
+		Force a Update
+-help
+	Show this dialoge
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""" ;;
 
 	*) bash /usr/bin/backupmypi/main.sh ;;
 esac
