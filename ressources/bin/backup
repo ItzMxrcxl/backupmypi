@@ -1,5 +1,30 @@
 #!/bin/bash
 # Author: Marcel Kallinger https://github.com/ItzMxrcxl
 # Open Source BackupMyPi Script
+while [ -n "$1" ]; do
 
-bash /usr/bin/backupmypi/main.sh
+	case "$1" in
+
+	--update) echo "-a option passed" ;;
+
+	-u) bash /usr/bin/backupmypi/updater.sh ;;
+
+	-help) echo """
+~~~BackupMyPi~~~
+ussage:
+	Normal ussage
+		Give the script no parameter and it will continue in normal mode.
+	Update:
+		-u
+		--update
+			Check for Updates
+	-help
+		Show this dialoge""";;
+
+	*) bash /usr/bin/backupmypi/main.sh ;;
+
+	esac
+
+	shift
+
+done
