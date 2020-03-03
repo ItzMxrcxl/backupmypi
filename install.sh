@@ -7,7 +7,7 @@ if [ "$EUID" -ne 0 ]
   exit 5
 fi
 
-echo "~~~~~~~~~~~~~~~~BackupMyPi~~~~~~~~~~~~~~~~"
+echo "~~~~~~~~~~~~~~~~BackupMyPi - Installer~~~~~~~~~~~~~~~~"
 echo "Author: Marcel Kallinger"
 echo "https://github.com/ItzMxrcxl"
 echo ""

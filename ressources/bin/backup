@@ -6,11 +6,11 @@ while [ -n "$1" ]; do
 	case "$1" in
 
 	--update) bash /usr/bin/backupmypi/updater.sh ;;
-
+	--force-update) bash /usr/bin/backupmypi/updater.sh -force ;;
 	-u) bash /usr/bin/backupmypi/updater.sh ;;
 
 	-help) echo """
-~~~BackupMyPi~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~BackupMyPi~~~~~~~~~~~~~~~~~~~~~~~~~
 ussage:
 	Normal ussage
 		Give the script no parameter and it will continue in normal mode.
@@ -18,8 +18,11 @@ ussage:
 		-u
 		--update
 			Check for Updates
+		--force-update
+			Force a Update
 	-help
-		Show this dialoge""";;
+		Show this dialoge
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""";;
 
 	*) bash /usr/bin/backupmypi/main.sh ;;
 	 ) bash /usr/bin/backupmypi/main.sh ;;
