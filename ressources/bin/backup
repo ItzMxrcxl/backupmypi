@@ -16,7 +16,7 @@ while [ -n "$arg" ]; do
 
 	--update) bash /usr/bin/backupmypi/updater.sh ;;
 	--force-update) bash /usr/bin/backupmypi/updater.sh -force ;;
-	-u) bash /usr/bin/backupmypi/updater.sh && ;;
+	-u) bash /usr/bin/backupmypi/updater.sh ;;
 
 	-help) echo """
 ~~~~~~~~~~~~~~~~~~~~~~~~~BackupMyPi~~~~~~~~~~~~~~~~~~~~~~~~~
