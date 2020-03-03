@@ -56,14 +56,9 @@ then #otherwise arg=argument
   arg=$1
 fi
 
-while [ -n "$arg" ]; do
-
-	case "$arg" in
+case "$arg" in
 	-force) force_update ;;
 	-update) self_update ;;
 	*) self_update ;;
-	esac
-
-	shift
-done
+esac
 exit 0
