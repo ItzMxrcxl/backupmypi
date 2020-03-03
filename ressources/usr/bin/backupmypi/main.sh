@@ -18,7 +18,7 @@ self_update() {
 		mkdir /usr/bin/backupmypi/temp
 	fi
     cd /usr/bin/backupmypi/temp
-    GITHUB_VERSION=`curl -H 'Cache-Control: no-cache' -o --silent - https://raw.githubusercontent.com/ItzMxrcxl/backupmypi/master/ressources/usr/bin/backupmypi/version`
+    GITHUB_VERSION=`curl --silent -H 'Cache-Control: no-cache' -o - https://raw.githubusercontent.com/ItzMxrcxl/backupmypi/master/ressources/usr/bin/backupmypi/version`
 	LOCAL_VERSION=`cat /usr/bin/backupmypi/version`
 	
     if [[ ! $GITHUB_VERSION = $LOCAL_VERSION ]]; then
@@ -27,7 +27,9 @@ self_update() {
         echo "Start install new Version..."
 		cd backupmypi
 		chmod +x install.sh
-        exec install.sh
+        sudo bash install.sh
+		cd ..
+		sudo rm -r /usr/bin/backupmypi/temp
         exit 100
 	else
 		echo "Script up to date."
