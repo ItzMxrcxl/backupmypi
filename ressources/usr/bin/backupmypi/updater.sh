@@ -52,8 +52,8 @@ while [ -n "$1" ]; do
 
 	case "$1" in
 	-force) force_update ;;
-
-	 ) self_update ;;
+	-update) self_update ;;
+	*) self_update ;;
 	esac
 
 	shift
