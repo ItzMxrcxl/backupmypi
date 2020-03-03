@@ -42,7 +42,7 @@ main() ( #if you wana build a part in it, before the backup wil be executed.
 backup() (
 	DATE_STARTED=$(date '+%Y-%m-%d_%H-%M-%S')
 	a=$SECONDS #Start the second timer
-	echo "Started backup at " + $DATE_STARTED
+	echo "Started backup at " $DATE_STARTED
 	backup_file=$backup_path "/" $DATE_STARTED ".img" #the filename
 	BOOT=`awk '$2 == "/"' /proc/self/mounts | sed 's/\s.*$//'`
 	echo "Create backup from device $BOOT"

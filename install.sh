@@ -16,7 +16,7 @@ apt update -y && apt upgrade -y
 echo "Installing dependent Packages" #Begin Installation
 apt install -y git rsync gzip
 if [[ -d "/usr/bin/backupmypi" ]] ; then
-	GITHUB_VERSION=`curl -o - https://raw.githubusercontent.com/ItzMxrcxl/backupmypi/master/ressources/usr/bin/backupmypi/version`
+	GITHUB_VERSION=`curl --silent -H 'Cache-Control: no-cache' -o - https://raw.githubusercontent.com/ItzMxrcxl/backupmypi/master/ressources/usr/bin/backupmypi/version`
 	LOCAL_VERSION=`cat /usr/bin/backupmypi/version`
 	if [[ ! GITHUB_VERSION = LOCAL_VERSION ]]; then
 		echo "Updating..."
@@ -49,6 +49,7 @@ if [[ -f "/usr/bin/backupmypi/config.txt" ]]; then
 	# echo "a backup of the configuration has been created. /usr/bin/backupmypi/config.txt"
 fi
 if [[ ! -f  "/usr/bin/backupmypi/config.txt" ]]; then
+	echo 'no config file found, copy sample to config file'
 	cp /usr/bin/backupmypi/config.txt.sample /usr/bin/backupmypi/config.txt
 fi
 echo "set file permissions"
