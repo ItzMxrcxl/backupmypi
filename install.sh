@@ -59,4 +59,4 @@ chmod +x /bin/backup
 chmod +x /usr/bin/backupmypi/*
 echo "finish."
 echo -e 'please edit the configuration!'
-echo "nano /usr/bin/backupmypi/config.txt"
+echo "sudo nano /usr/bin/backupmypi/config.txt"

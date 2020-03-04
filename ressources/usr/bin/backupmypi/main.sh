@@ -41,7 +41,8 @@ backup() (
 
 shrink() ( #Shrinking the image file to a realisable filesize
 	echo "Zipping backup file to shrink filesize, unpacked file will be same big as the SD-Card!"
-	 pv $backup_file | gzip > $backup_file'.gz'
+	pv $backup_file | gzip > $backup_file'.gz'
+	rm $backup_file
 )
 
 output() (
