@@ -32,7 +32,7 @@ backup() (
 	BOOT=`awk '$2 == "/"' /proc/self/mounts | sed 's/\s.*$//'`
 	echo "Create backup from device " $BOOT
 	sudo dd if=$BOOT of=$backup_file status=progress
-	if $shrink_image = 'True' ; then #if shrink_image is in Config file True, execute shrink
+	if [ $shrink_image = 'True' ]; then #if shrink_image is in Config file True, execute shrink
 		shrink
 	fi
 )
