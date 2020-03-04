@@ -12,7 +12,7 @@ fi
 
 show_version() (
 	LOCAL_VERSION=`cat /usr/bin/backupmypi/version`
-	echo "BackupMyPi v"$LOCAL_VERSION" (c)2020"
+	echo "BackupMyPi v"$LOCAL_VERSION" (c)2020 Marcel Kallinger"
 )
 
 case "$arg" in

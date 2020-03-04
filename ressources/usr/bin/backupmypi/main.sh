@@ -13,27 +13,8 @@ DATE=$(date '+%Y-%m-%d_%H-%M-%S')
 # exec 1>/tmp/bmp_$DATE.log 2>&1
 
 self_update() {
-	if [[ ! -d /usr/bin/backupmypi/temp ]]; then
-		echo "Temp directory doesn't exist"
-		mkdir /usr/bin/backupmypi/temp
-	fi
-    cd /usr/bin/backupmypi/temp
-    GITHUB_VERSION=`curl --silent -H 'Cache-Control: no-cache' -o - https://raw.githubusercontent.com/ItzMxrcxl/backupmypi/master/ressources/usr/bin/backupmypi/version`
-	LOCAL_VERSION=`cat /usr/bin/backupmypi/version`
-	
-    if [[ ! $GITHUB_VERSION = $LOCAL_VERSION ]]; then
-        echo "Found updates for the Script..."
-        git clone https://github.com/ItzMxrcxl/backupmypi.git
-        echo "Start install new Version..."
-		cd backupmypi
-		chmod +x install.sh
-        sudo bash install.sh
-		cd ..
-		sudo rm -r /usr/bin/backupmypi/temp
-        exit 100
-	else
-		echo "Script up to date."
-	fi
+	cd /usr/bin/backupmypi/
+	sudo bash updater.sh
 }
 
 main() ( #if you wana build a part in it, before the backup wil be executed.
@@ -43,11 +24,11 @@ backup() (
 	DATE_STARTED=$(date '+%Y-%m-%d_%H-%M-%S')
 	a=$SECONDS #Start the second timer
 	echo "Started backup at " $DATE_STARTED
-	backup_file=$backup_path "/" $DATE_STARTED ".img" #the filename
+	backup_file=$backup_path'/'$DATE_STARTED'.img' #the filename
 	BOOT=`awk '$2 == "/"' /proc/self/mounts | sed 's/\s.*$//'`
-	echo "Create backup from device $BOOT"
+	echo "Create backup from device " $BOOT
 	sudo dd if=$BOOT of=$backup_file status=progress
-	if $shrink_image = 'True' ; then
+	if $shrink_image = 'True' ; then #if shrink_image is in Config file True, execute shrink
 		shrink
 	fi
 )
