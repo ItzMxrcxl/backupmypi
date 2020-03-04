@@ -24,7 +24,7 @@ backup() (
 	DATE_STARTED=$(date '+%Y-%m-%d_%H-%M-%S')
 	a=$SECONDS #Start the second timer
 	if [[ ! -d $backup_path ]]; then
-		echo "ERROR: Backup folder: "$backup_path" : doesnt exist, is the backup medium mounted? Try mounting the medium/share or create the backup folder."
+		echo "ERROR: Backup folder: "$backup_path" : doesnt exist, is the backup medium mounted? Does the Backup folde rexist? Try mounting the medium/share or create the backup folder."
 		exit 1
 	fi
 	echo "Started backup at " $DATE_STARTED
@@ -40,9 +40,15 @@ backup() (
 )
 
 shrink() ( #Shrinking the image file to a realisable filesize
-	echo "Zipping backup file to shrink filesize, unpacked file will be same big as the SD-Card!"
-	pv $backup_file | gzip > $backup_file'.gz'
-	rm $backup_file
+	echo "First we resize the image"
+	e2fsck -f -y $backup_file
+	resize2fs -M $backup_file
+	if [ $compress_image = 'True' ]; then
+		echo "Zipping backup file"
+		pv $backup_file | gzip > $backup_file'.gz'
+		echo "Deleting source file"
+		rm $backup_file
+	fi
 )
 
 output() (

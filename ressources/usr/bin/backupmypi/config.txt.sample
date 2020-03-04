@@ -1,3 +1,4 @@
 backup_drive=/dev/mmcblk0
 backup_path=/mnt/backup/PiBackup
 shrink_image=True
+compress_image=True
