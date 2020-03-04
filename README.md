@@ -78,8 +78,8 @@ Wenn nun der Fehler...
     fsck.exfat /dev/***
 *Die Sternchen mit dem "Laufwerksbuchstaben" ersetzen*
 ### Wie Mounte ich ein Windows Share?
-	[Mount Permanent](https://wiki.ubuntu.com/MountWindowsSharesPermanently)
-	[Samba Cifs Client](https://wiki.ubuntuusers.de/Samba_Client_cifs/)
+[Mount Permanent](https://wiki.ubuntu.com/MountWindowsSharesPermanently)
+[Samba Cifs Client](https://wiki.ubuntuusers.de/Samba_Client_cifs/)
 ## Fehlerbehandlung
 
 > ERROR: Backup folder: xxxxx : doesnt exist, is the backup medium mounted? Try mounting the medium/share or create the backup folder.
