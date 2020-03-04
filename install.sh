@@ -14,7 +14,7 @@ echo ""
 echo "First we make some Updates..."
 apt update -y && apt upgrade -y
 echo "Installing dependent Packages" #Begin Installation
-apt install -y git rsync gzip
+apt install -y git rsync gzip pv
 if [[ -d "/usr/bin/backupmypi" ]] ; then
 	GITHUB_VERSION=`curl --silent -H 'Cache-Control: no-cache' -o - https://raw.githubusercontent.com/ItzMxrcxl/backupmypi/master/ressources/usr/bin/backupmypi/version`
 	LOCAL_VERSION=`cat /usr/bin/backupmypi/version`

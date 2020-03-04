@@ -24,12 +24,13 @@ backup() (
 	DATE_STARTED=$(date '+%Y-%m-%d_%H-%M-%S')
 	a=$SECONDS #Start the second timer
 	if [[ ! -d $backup_path ]]; then
-		echo "ERROR: Backup Path: "$backup_path" : doesnt exist, is the backup medium mounted? Try mounting the medium/share"
+		echo "ERROR: Backup folder: "$backup_path" : doesnt exist, is the backup medium mounted? Try mounting the medium/share or create the backup folder."
 		exit 1
 	fi
 	echo "Started backup at " $DATE_STARTED
 	backup_file=$backup_path'/'$DATE_STARTED'.img' #the filename
 	BOOT=`awk '$2 == "/"' /proc/self/mounts | sed 's/\s.*$//'`
+	BOOT='/dev/mmcblk0' #for raspi
 	echo "Create backup from device " $BOOT
 	sudo dd if=$BOOT of=$backup_file status=progress
 	if [ $shrink_image = 'True' ]; then #if shrink_image is in Config file True, execute shrink
@@ -38,9 +39,8 @@ backup() (
 )
 
 shrink() ( #Shrinking the image file to a realisable filesize
-	echo "Zipping backup file to shrink filesize"
-	BACKUP_USEDSPACE=$`du --apparent-size $backup_file`
-	gzip $backup_file
+	echo "Zipping backup file to shrink filesize, unpacked file will be same big as the SD-Card!"
+	 pv $backup_file | gzip > $backup_file'.gz'
 )
 
 output() (
