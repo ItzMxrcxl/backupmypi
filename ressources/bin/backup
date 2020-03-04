@@ -4,7 +4,7 @@
 
 if [ -z $1 ] #if no argument is given set arg normal (*)
 then
-  arg="-default"
+  arg="default"
 elif [ -n $1 ]
 then #otherwise arg=argument
   arg=$1
@@ -37,7 +37,7 @@ case "$arg" in
 	-u) sudo bash /usr/bin/backupmypi/updater.sh ;;
 	-v) show_version ;;
 	-help) show_help ;;
-	-default) bash /usr/bin/backupmypi/main.sh ;;
+	default) bash /usr/bin/backupmypi/main.sh ;;
 	*) show_help ;;
 esac
 exit 0
