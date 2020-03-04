@@ -30,7 +30,7 @@ backup() (
 	echo "Started backup at " $DATE_STARTED
 	backup_file=$backup_path'/'$DATE_STARTED'.img' #the filename
 	BOOT=`awk '$2 == "/"' /proc/self/mounts | sed 's/\s.*$//'`
-	BOOT='/dev/mmcblk0' #for raspi
+	#BOOT='/dev/mmcblk0' #for rasperry pi
 	echo "Create backup from device " $BOOT
 	sudo dd if=$BOOT of=$backup_file status=progress
 	if [ $shrink_image = 'True' ]; then #if shrink_image is in Config file True, execute shrink
