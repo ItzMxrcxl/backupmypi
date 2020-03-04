@@ -23,6 +23,10 @@ main() ( #if you wana build a part in it, before the backup wil be executed.
 backup() (
 	DATE_STARTED=$(date '+%Y-%m-%d_%H-%M-%S')
 	a=$SECONDS #Start the second timer
+	if [[ ! -d $backup_path ]]; then
+		echo "ERROR: Backup Path: "$backup_path" : doesnt exist, is the backup medium mounted? Try mounting the medium/share"
+		exit 1
+	fi
 	echo "Started backup at " $DATE_STARTED
 	backup_file=$backup_path'/'$DATE_STARTED'.img' #the filename
 	BOOT=`awk '$2 == "/"' /proc/self/mounts | sed 's/\s.*$//'`
