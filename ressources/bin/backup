@@ -4,7 +4,7 @@
 
 if [ -z $1 ] #if no argument is given set arg normal (*)
 then
-  arg="normal"
+  arg="-default"
 elif [ -n $1 ]
 then #otherwise arg=argument
   arg=$1
@@ -14,13 +14,8 @@ show_version() (
 	LOCAL_VERSION=`cat /usr/bin/backupmypi/version`
 	echo "BackupMyPi v"$LOCAL_VERSION" (c)2020 Marcel Kallinger"
 )
-
-case "$arg" in
-	--update) bash /usr/bin/backupmypi/updater.sh ;;
-	--force-update) bash /usr/bin/backupmypi/updater.sh -force ;;
-	-u) bash /usr/bin/backupmypi/updater.sh ;;
-	-v) show_version ;;
-	-help) echo """
+show_help() (
+	echo """
 ~~~~~~~~~~~~~~~~~~~~~~~~~BackupMyPi~~~~~~~~~~~~~~~~~~~~~~~~~
 ussage:
 Normal ussage
@@ -33,7 +28,16 @@ Update:
 		Force a Update
 -help
 	Show this dialoge
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""" ;;
-	*) bash /usr/bin/backupmypi/main.sh ;;
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"""
+)
+
+case "$arg" in
+	--update) sudo bash /usr/bin/backupmypi/updater.sh ;;
+	--force-update) sudo bash /usr/bin/backupmypi/updater.sh -force ;;
+	-u) sudo bash /usr/bin/backupmypi/updater.sh ;;
+	-v) show_version ;;
+	-help) show_help ;;
+	-default) bash /usr/bin/backupmypi/main.sh ;;
+	*) show_help ;;
 esac
 exit 0
