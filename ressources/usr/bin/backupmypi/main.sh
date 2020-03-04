@@ -1,6 +1,10 @@
 #!/bin/bash
 # Author: Marcel Kallinger https://github.com/ItzMxrcxl
 # BackupMyPi Script
+echo "~~~~~~~~~~~~~~~~BackupMyPi - Backup~~~~~~~~~~~~~~~~"
+echo "Author: Marcel Kallinger"
+echo "https://github.com/ItzMxrcxl"
+echo ""
 
 . /usr/bin/backupmypi/config.txt
 
@@ -33,7 +37,7 @@ backup() (
 	#BOOT='/dev/mmcblk0' #for rasperry pi
 	BOOT=$backup_drive
 	echo "Create backup from device" $BOOT ", file "$backup_file
-	sudo dd if=$BOOT of=$backup_file bs=32M status=progress
+	sudo dd if=$BOOT of=$backup_file bs=100M status=progress
 	if [ $shrink_image = 'True' ]; then #if shrink_image is in Config file True, execute shrink
 		shrink
 	fi
