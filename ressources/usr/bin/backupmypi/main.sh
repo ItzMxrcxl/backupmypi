@@ -37,10 +37,10 @@ backup() (
 	#BOOT='/dev/mmcblk0' #for rasperry pi
 	BOOT=$backup_drive
 	echo "Create backup from device" $BOOT ", file "$backup_file
-	sudo dd if=$BOOT of=$backup_file bs=100M status=progress
-	if [ $shrink_image = 'True' ]; then #if shrink_image is in Config file True, execute shrink
-		shrink
-	fi
+	sudo dd if=$BOOT bs=16M status=progress | gzip -c  > $backup_file'.gz'
+	# if [ $shrink_image = 'True' ]; then #if shrink_image is in Config file True, execute shrink
+		# shrink
+	# fi
 )
 
 shrink() ( #Shrinking the image file to a realisable filesize
