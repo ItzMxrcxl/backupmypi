@@ -47,7 +47,7 @@ shrink() ( #Shrinking the image file to a realisable filesize
 		echo "Zipping backup file"
 		pv $backup_file | gzip > $backup_file'.gz'
 		echo "Deleting source file"
-		rm $backup_file
+		sudo rm $backup_file
 	fi
 )
 
