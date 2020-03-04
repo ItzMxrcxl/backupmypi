@@ -12,9 +12,9 @@ echo "Author: Marcel Kallinger"
 echo "https://github.com/ItzMxrcxl"
 echo ""
 echo "First we make some Updates..."
-apt update -y && apt upgrade -y
+apt update -y && apt upgrade -y -qq > /dev/null
 echo "Installing dependent Packages" #Begin Installation
-apt install -y git rsync gzip pv
+apt install -y git rsync gzip pv exfat-fuse exfat-utils cifs-utils -qq > /dev/null
 if [[ -d "/usr/bin/backupmypi" ]] ; then
 	GITHUB_VERSION=`curl --silent -H 'Cache-Control: no-cache' -o - https://raw.githubusercontent.com/ItzMxrcxl/backupmypi/master/ressources/usr/bin/backupmypi/version`
 	LOCAL_VERSION=`cat /usr/bin/backupmypi/version`
