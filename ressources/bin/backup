@@ -34,6 +34,6 @@ Update:
 -help
 	Show this dialoge
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""" ;;
-
 	*) bash /usr/bin/backupmypi/main.sh ;;
 esac
+exit 0
