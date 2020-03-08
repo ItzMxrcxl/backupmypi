@@ -55,7 +55,7 @@ if [[ update_config = "true" ]]; then
 	cp /usr/bin/backupmypi/config.txt.sample /usr/bin/backupmypi/config.txt
 fi
 if [[ ! -f  "/usr/bin/backupmypi/config.txt" ]]; then
-	msg_config_created = true
+	msg_config_created="true"
 	cp /usr/bin/backupmypi/config.txt.sample /usr/bin/backupmypi/config.txt
 	echo "Created Config file"
 fi
@@ -67,6 +67,6 @@ chmod +x /usr/bin/backupmypi/*
 echo "cleanup"
 rm /usr/bin/backupmypi/update.notes
 echo "finish."
-if [ $msg_config_created = true ]; then
+if [ $msg_config_created = "true" ]; then
 	echo "Config file has been freshly created, please check!"
 fi
