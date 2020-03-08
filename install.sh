@@ -48,7 +48,7 @@ echo "Copy Programm"
 cp ressources/bin/* /bin/
 
 source /usr/bin/backupmypi/update.notes
-if [[ update_config = "true" ]]; then
+if [[ $update_config = "true" ]]; then
 	echo -e 'WARNING: new config file has been added, please check configuration!'
 	cp /usr/bin/backupmypi/config.txt /usr/bin/backupmypi/config.txt.bak
 	echo "a backup of the configuration has been created. /usr/bin/backupmypi/config.txt.bak"
