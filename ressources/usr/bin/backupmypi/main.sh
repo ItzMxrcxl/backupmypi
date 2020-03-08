@@ -36,19 +36,19 @@ main() ( #if you wana build a part in it, before the backup wil be executed.
 
 backup() (
 	DATE_STARTED=$(date '+%Y-%m-%d_%H-%M-%S')
-	a=$SECONDS #Start the second timer
+	BOOT=$backup_drive
 	if [[ ! -d $backup_path ]]; then
-		echo "ERROR: Backup Ordner: "$backup_path" : exisitert nicht, Ist das Speichergerät mounted?"
+		echo "ERROR: Backup Ordner "$backup_path" exisitert nicht, Ist das Speichergerät mounted?"
 		exit 1
 	fi
-	echo "Starte Backup " $DATE_STARTED
-	backup_file=$backup_path'/'$DATE_STARTED'.img' #the filename
-	#BOOT=`awk '$2 == "/"' /proc/self/mounts | sed 's/\s.*$//'`
-	BOOT=$backup_drive
 	if [ ! -f $BOOT ]; then
-		echo $BOOT" exisitert nicht! Bitte überprüfe Konfig Datei"
+		echo "Backup Quelle "$BOOT" exisitert nicht! Bitte überprüfe Konfig Datei"
 		exit 10
 	fi
+	echo "Starte Backup " $DATE_STARTED
+	a=$SECONDS #Start the second timer
+	backup_file=$backup_path'/'$DATE_STARTED'.img' #the filename
+	#BOOT=`awk '$2 == "/"' /proc/self/mounts | sed 's/\s.*$//'`
 	echo "Erstelle Backup von " $BOOT ", speichere dies unter "$backup_file
 	if [ $compress_image = 'True' ]; then #if compress_image is in Config file True, execute zip
 		zip
