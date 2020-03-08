@@ -31,7 +31,6 @@ self_update() {
 }
 
 main() ( #if you wana build a part in it, before the backup wil be executed.
-	failed=0
 	backup
 )
 
@@ -45,38 +44,32 @@ backup() (
 	test -e $BOOT
 	if [ ! $?=0 ]; then
 		echo "Backup Quelle "$BOOT" exisitert nicht! Bitte überprüfe Konfig Datei"
-		failed=1
-		exit 10
+		exit 1
 	fi
-	echo "Starte Backup " $DATE_STARTED
 	a=$SECONDS #Start the timer
 	backup_file=$backup_path'/'$DATE_STARTED'.img' #the filename
 	#BOOT=`awk '$2 == "/"' /proc/self/mounts | sed 's/\s.*$//'` #Get boot device with partition
 	if [ $compress_image = 'True' ]; then
-		echo "Erstelle Backup von " $BOOT ", speichere dies unter "$backup_file".gz"
+		echo "Erstelle Backup von " $BOOT", speichere dies unter "$backup_file".gz"
 		zip
 	else
-		echo "Erstelle Backup von " $BOOT ", speichere dies unter "$backup_file
+		echo "Erstelle Backup von " $BOOT", speichere dies unter "$backup_file
 		normal_backup
 	fi
 )
 
 zip() ( #Shrinking image while copying
 	echo "Backupdatei wird wärend dem Backup zusätzlich gepackt."
-	sudo dd if=$BOOT bs=16M status=progress | gzip -c  > $backup_file'.gz'
+	sudo dd if=$BOOT bs=4M status=progress | gzip -c  > $backup_file'.gz'
 )
 normal_backup() (
-	sudo dd if=$BOOT of=$backup_file bs=16M status=progress
+	sudo dd if=$BOOT of=$backup_file bs=4M status=progress
 )
 
 output() (
 	duration=$SECONDS #Stop the timer
-	if [ $failed = 1 ]; then
-		exit 100
-	fi
 	echo "Das Backup wurde in $(($duration / 60)) Minuten und $(($duration % 60)) Sekunden erstellt." #Output the Timer
 )
-
 
 self_update #If you want to disable the Autoupdate, mark this line
 main
