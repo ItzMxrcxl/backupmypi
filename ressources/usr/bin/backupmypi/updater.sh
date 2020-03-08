@@ -7,6 +7,24 @@ echo "Author: Marcel Kallinger"
 echo "https://github.com/ItzMxrcxl"
 echo ""
 
+if [[ ! -f "/usr/bin/backupmypi/version" ]]; then
+		echo "ERROR: Version Datei existiert nicht"
+		exit 3
+fi
+. /usr/bin/backupmypi/version
+
+check_connection() {
+	echo "Check connection"
+	wget -q --spider http://google.com
+	if [ $? -eq 0 ]; then
+		echo "OK"
+	else
+		echo "could not estabalise a Connection"
+		exit 50
+	fi
+	exit 0
+}
+
 self_update() {
 	if [[ ! -d /usr/bin/backupmypi/temp ]]; then
 		echo "Temp directory doesn't exist"
@@ -14,7 +32,7 @@ self_update() {
 	fi
 	cd /usr/bin/backupmypi/temp
 	GITHUB_VERSION=`curl --silent -H 'Cache-Control: no-cache' -o - https://raw.githubusercontent.com/ItzMxrcxl/backupmypi/master/ressources/usr/bin/backupmypi/version`
-	LOCAL_VERSION=`cat /usr/bin/backupmypi/version`
+	LOCAL_VERSION=$installed_version
 	
 	if [[ ! $GITHUB_VERSION = $LOCAL_VERSION ]]; then
 		echo 'Found updates for the Script. Github Version' $GITHUB_VERSION 'Local Version' $LOCAL_VERSION
@@ -48,6 +66,9 @@ force_update() {
 	sudo rm -r /usr/bin/backupmypi/temp
 	exit 0
 }
+
+check_connection
+
 if [ -z $1 ] #if no argument is given set arg normal (*)
 then
   arg="normal"

@@ -6,7 +6,17 @@ echo "Author: Marcel Kallinger"
 echo "https://github.com/ItzMxrcxl"
 echo ""
 
+if [[ ! -f "/usr/bin/backupmypi/config.txt" ]]; then
+		echo "ERROR: Config Datei existiert nicht"
+		exit 2
+fi
 . /usr/bin/backupmypi/config.txt
+
+if [[ ! -f "/usr/bin/backupmypi/version" ]]; then
+		echo "ERROR: Version Datei existiert nicht"
+		exit 3
+fi
+. /usr/bin/backupmypi/version
 
 DATE=$(date '+%Y-%m-%d_%H-%M-%S')
 
@@ -17,8 +27,14 @@ DATE=$(date '+%Y-%m-%d_%H-%M-%S')
 # exec 1>/tmp/bmp_$DATE.log 2>&1
 
 self_update() {
+	echo "Prüfe updates..-"
 	cd /usr/bin/backupmypi/
 	sudo bash updater.sh
+	if [ $? -eq 0 ]; then
+		pass
+	else
+		echo "Error! "$?
+	fi
 }
 
 main() ( #if you wana build a part in it, before the backup wil be executed.
@@ -28,34 +44,32 @@ backup() (
 	DATE_STARTED=$(date '+%Y-%m-%d_%H-%M-%S')
 	a=$SECONDS #Start the second timer
 	if [[ ! -d $backup_path ]]; then
-		echo "ERROR: Backup folder: "$backup_path" : doesnt exist, is the backup medium mounted? Does the Backup folde rexist? Try mounting the medium/share or create the backup folder."
+		echo "ERROR: Backup Ordner: "$backup_path" : exisitert nicht, Ist das Speichergerät mounted?"
 		exit 1
 	fi
-	echo "Started backup at " $DATE_STARTED
+	echo "Starte Backup " $DATE_STARTED
 	backup_file=$backup_path'/'$DATE_STARTED'.img' #the filename
 	#BOOT=`awk '$2 == "/"' /proc/self/mounts | sed 's/\s.*$//'`
-	#BOOT='/dev/mmcblk0' #for rasperry pi
 	BOOT=$backup_drive
-	echo "Create backup from device" $BOOT ", file "$backup_file
-	if [ $shrink_image = 'True' ]; then #if shrink_image is in Config file True, execute shrink
-		shrink
+	echo "Erstelle Backup von " $BOOT ", speichere dies unter "$backup_file
+	if [ $compress_image = 'True' ]; then #if compress_image is in Config file True, execute zip
+		zip
 	else
 		normal_backup
 	fi
 )
 
-shrink() ( #Shrinking the image file to a realisable filesize
-	echo "Zipping backup file"
+zip() ( #Shrinking image while copying
+	echo "Backup wird wärend dem Backup zusätzlich gepackt."
 	sudo dd if=$BOOT bs=16M status=progress | gzip -c  > $backup_file'.gz'
 )
 normal_backup() (
-	echo "create backup file"
 	sudo dd if=$BOOT of=$backup_file bs=16M status=progress
 )
 
 output() (
 	duration=$SECONDS #Stop the timer
-	echo "$(($duration / 60)) minutes and $(($duration % 60)) seconds elapsed." #Output the Timer
+	echo "Das Backup wurde in $(($duration / 60)) Minuten und $(($duration % 60)) Sekunden erstellt." #Output the Timer
 )
 
 

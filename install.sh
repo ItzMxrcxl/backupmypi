@@ -2,9 +2,10 @@
 # Author: Marcel Kallinger https://github.com/ItzMxrcxl
 # BackupMyPi Script
 
-if [ "$EUID" -ne 0 ]
-  then echo "Please run as root" && echo "sudo install.sh"
-  exit 5
+if [ "$EUID" -ne 0 ] then
+	echo "Please run as root or with sudo" 
+	echo "sudo install.sh"
+	exit 5
 fi
 
 echo "~~~~~~~~~~~~~~~~BackupMyPi - Installer~~~~~~~~~~~~~~~~"
@@ -15,9 +16,11 @@ echo "First we make some Updates..."
 apt update -y && apt upgrade -y
 echo "Installing dependent Packages" #Begin Installation
 apt install -y git rsync gzip pv exfat-fuse exfat-utils cifs-utils
+
 if [[ -d "/usr/bin/backupmypi" ]] ; then
+	. /usr/bin/backupmypi/version #include version file
 	GITHUB_VERSION=`curl --silent -H 'Cache-Control: no-cache' -o - https://raw.githubusercontent.com/ItzMxrcxl/backupmypi/master/ressources/usr/bin/backupmypi/version`
-	LOCAL_VERSION=`cat /usr/bin/backupmypi/version`
+	LOCAL_VERSION=$installed_version
 	if [[ ! GITHUB_VERSION = LOCAL_VERSION ]]; then
 		echo "Updating..."
 	else
@@ -40,23 +43,28 @@ if [[ ! -d "/usr/bin/backupmypi/" ]]; then
 	echo "Created folder /usr/bin/backupmypi/"
 	mkdir /usr/bin/backupmypi/
 fi
+echo "Copy Programm data"
 cp ressources/usr/bin/backupmypi/* /usr/bin/backupmypi/
+echo "Copy Programm"
 cp ressources/bin/* /bin/
-if [[ -f "/usr/bin/backupmypi/config.txt" ]]; then
+
+if [[ updated_config = "true" ]]; then
 	echo -e 'WARNING: new config file has been added, please check configuration!'
 	cp /usr/bin/backupmypi/config.txt /usr/bin/backupmypi/config.txt.bak
+	echo "a backup of the configuration has been created. /usr/bin/backupmypi/config.txt.bak"
 	cp /usr/bin/backupmypi/config.txt.sample /usr/bin/backupmypi/config.txt
-	# echo "a backup of the configuration has been created. /usr/bin/backupmypi/config.txt"
 fi
 if [[ ! -f  "/usr/bin/backupmypi/config.txt" ]]; then
-	echo 'no config file found, copy sample to config file'
+	msg_config_created = true
 	cp /usr/bin/backupmypi/config.txt.sample /usr/bin/backupmypi/config.txt
+	echo "Created Config file"
 fi
-echo "set file permissions"
+echo "set permissions"
 chown pi:pi /usr/bin/backupmypi #Give folder to user Pi
 chmod 770 /usr/bin/backupmypi
 chmod +x /bin/backup
 chmod +x /usr/bin/backupmypi/*
 echo "finish."
-echo -e 'please edit the configuration!'
-echo "sudo nano /usr/bin/backupmypi/config.txt"
+if [ $msg_config_created = true ]; then
+	echo "Config file has been freshly created, please check!"
+fi
