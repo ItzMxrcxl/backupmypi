@@ -7,12 +7,6 @@ echo "Author: Marcel Kallinger"
 echo "https://github.com/ItzMxrcxl"
 echo ""
 
-if [[ ! -f "/usr/bin/backupmypi/version" ]]; then
-		echo "ERROR: Version Datei existiert nicht"
-		exit 3
-fi
-. /usr/bin/backupmypi/version
-
 check_connection() {
 	echo "Check connection"
 	wget -q --spider http://google.com
@@ -32,7 +26,7 @@ self_update() {
 	fi
 	cd /usr/bin/backupmypi/temp
 	GITHUB_VERSION=`curl --silent -H 'Cache-Control: no-cache' -o - https://raw.githubusercontent.com/ItzMxrcxl/backupmypi/master/ressources/usr/bin/backupmypi/version`
-	LOCAL_VERSION=$installed_version
+	LOCAL_VERSION=`cat /usr/bin/backupmypi/version`
 	
 	if [[ ! $GITHUB_VERSION = $LOCAL_VERSION ]]; then
 		echo 'Found updates for the Script. Github Version' $GITHUB_VERSION 'Local Version' $LOCAL_VERSION
