@@ -1,4 +1,5 @@
 backup_drive=/dev/mmcblk0
 backup_path=/mnt/backup/PiBackup
+backup_name=`hostname`_$(date '+%Y-%m-%d_%H-%M-%S') 
 shrink_image=True
-compress_image=True
+compress_image=False
