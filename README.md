@@ -6,7 +6,7 @@ BackupMyPi ist ein Gratis Tool um während dem Betrieb ein volles Backup deiner 
 BackupMyPi erlaubt dir, ein komplettes Image deiner SD Karte des Raspberry Pi's oder auch Linux System zu erstellen, mit nur einem Befehl.
 ## Wie installiere ich BackupMyPi?
 Das ist ganz einfach.
-Zuerst verbindest du dich pre SSH mit deinem Pi (Desktop Shell geht auch). Danach ladest du dir die Git Repo herunter.
+Zuerst verbindest du dich deinem Pi und öffnest das Terminal (SSH geht auch). Danach ladest du dir die Git Repo herunter.
 
     git clone https://github.com/ItzMxrcxl/backupmypi.git
 Nachdem es sich geklont hat, müssen wir in den Ordner gehen.
