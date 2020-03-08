@@ -2,7 +2,7 @@
 # Author: Marcel Kallinger https://github.com/ItzMxrcxl
 # Part of the BackupMyPi Project
 # Automatic Update Script
-echo "~~~~~~~~~~~~~~~BackupMyPi - Updater~~~~~~~~~~~~~~~"
+echo "~~~~~~~~~~~~~~~~BackupMyPi - Updater~~~~~~~~~~~~~~~~"
 echo "Author: Marcel Kallinger"
 echo "https://github.com/ItzMxrcxl"
 echo ""

@@ -1,18 +1,20 @@
 #!/bin/bash
 # Author: Marcel Kallinger https://github.com/ItzMxrcxl
 # BackupMyPi Script
-echo "~~~~~~~~~~~~~~~BackupMyPi - Backup~~~~~~~~~~~~~~~"
+echo "~~~~~~~~~~~~~~~BackupMyPi - Backup~~~~~~~~~~~~~~~~"
 echo "Author: Marcel Kallinger"
 echo "https://github.com/ItzMxrcxl"
 echo ""
 
-if [[ ! -f "/usr/bin/backupmypi/config.txt" ]]; then
+if [[ ! -f "/usr/bin/backupmypi/config.txt" ]]
+then
 		echo "ERROR: Config Datei existiert nicht"
 		exit 2
 fi
 . /usr/bin/backupmypi/config.txt
 
-if [[ ! -f "/usr/bin/backupmypi/version" ]]; then
+if [[ ! -f "/usr/bin/backupmypi/version" ]]
+then
 		echo "ERROR: Version Datei existiert nicht"
 		exit 3
 fi
