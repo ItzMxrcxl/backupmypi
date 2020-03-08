@@ -2,10 +2,6 @@
 # Author: Marcel Kallinger https://github.com/ItzMxrcxl
 # Part of the BackupMyPi Project
 # Automatic Update Script
-echo "~~~~~~~~~~~~~~~~BackupMyPi - Updater~~~~~~~~~~~~~~~~"
-echo "Author: Marcel Kallinger"
-echo "https://github.com/ItzMxrcxl"
-echo ""
 
 check_connection() {
 	echo "Check connection"
@@ -19,17 +15,17 @@ check_connection() {
 }
 
 self_update() {
-	if [[ ! -d /usr/bin/backupmypi/temp ]]; then
-		echo "Temp directory doesn't exist"
-		mkdir /usr/bin/backupmypi/temp
-	fi
-	cd /usr/bin/backupmypi/temp
 	GITHUB_VERSION=`curl --silent -H 'Cache-Control: no-cache' -o - https://raw.githubusercontent.com/ItzMxrcxl/backupmypi/master/ressources/usr/bin/backupmypi/version`
 	LOCAL_VERSION=`cat /usr/bin/backupmypi/version`
 	
 	if [[ ! $GITHUB_VERSION = $LOCAL_VERSION ]]; then
 		echo 'Found updates for the Script. Github Version' $GITHUB_VERSION 'Local Version' $LOCAL_VERSION
-		git clone https://github.com/ItzMxrcxl/backupmypi.git
+		if [[ ! -d /usr/bin/backupmypi/temp ]]; then
+			echo "Temp directory doesn't exist, create"
+			mkdir /usr/bin/backupmypi/temp
+		fi
+		cd /usr/bin/backupmypi/temp
+		git clone https://github.com/ItzMxrcxl/backupmypi.git #Download update
 		echo "Start install new Version..."
 		cd backupmypi
 		chmod +x install.sh
