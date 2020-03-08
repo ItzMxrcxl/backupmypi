@@ -1,7 +1,7 @@
 #!/bin/bash
 # Author: Marcel Kallinger https://github.com/ItzMxrcxl
 # BackupMyPi Script
-echo "~~~~~~~~~~~~~~~~BackupMyPi - Backup~~~~~~~~~~~~~~~~"
+echo "~~~~~~~~~~~~~~~BackupMyPi - Backup~~~~~~~~~~~~~~~"
 echo "Author: Marcel Kallinger"
 echo "https://github.com/ItzMxrcxl"
 echo ""
