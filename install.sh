@@ -18,7 +18,6 @@ echo "Installing dependent Packages" #Begin Installation
 apt install -y git rsync gzip pv exfat-fuse exfat-utils cifs-utils
 
 if [[ -d "/usr/bin/backupmypi" ]] ; then
-	. /usr/bin/backupmypi/version #include version file
 	GITHUB_VERSION=`curl --silent -H 'Cache-Control: no-cache' -o - https://raw.githubusercontent.com/ItzMxrcxl/backupmypi/master/ressources/usr/bin/backupmypi/version`
 	LOCAL_VERSION=$installed_version
 	if [[ ! GITHUB_VERSION = LOCAL_VERSION ]]; then
