@@ -2,7 +2,7 @@
 # Author: Marcel Kallinger https://github.com/ItzMxrcxl
 # BackupMyPi Script
 
-if [ "$EUID" -ne 0 ] then
+if [ "$EUID" -ne 0 ]; then
 	echo "Please run as root or with sudo" 
 	echo "sudo install.sh"
 	exit 5
