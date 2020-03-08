@@ -60,7 +60,7 @@ backup() (
 
 zip() ( #Shrinking image while copying
 	echo "Backupdatei wird wärend dem Backup zusätzlich gepackt."
-	sudo dd if=$BOOT conv=sparse conv=sparse bs=512 progress | gzip -c  > $backup_file'.gz'
+	sudo dd if=$BOOT conv=sparse conv=sparse bs=512 status=progress | gzip -c  > $backup_file'.gz'
 )
 normal_backup() (
 	sudo dd if=$BOOT of=$backup_file conv=sparse bs=512 status=progress
