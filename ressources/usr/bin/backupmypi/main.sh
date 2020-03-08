@@ -45,6 +45,10 @@ backup() (
 	backup_file=$backup_path'/'$DATE_STARTED'.img' #the filename
 	#BOOT=`awk '$2 == "/"' /proc/self/mounts | sed 's/\s.*$//'`
 	BOOT=$backup_drive
+	if [[ ! -f $BOOT]]; then
+		echo $BOOT" exisitert nicht! Bitte überprüfe Konfig Datei"
+		exit 10
+	fi
 	echo "Erstelle Backup von " $BOOT ", speichere dies unter "$backup_file
 	if [ $compress_image = 'True' ]; then #if compress_image is in Config file True, execute zip
 		zip
