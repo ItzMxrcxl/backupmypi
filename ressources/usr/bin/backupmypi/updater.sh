@@ -9,7 +9,7 @@ echo ""
 
 check_connection() {
 	echo "Check connection"
-	wget -q --spider http://google.com
+	wget -q --spider github.com
 	if [ $? -eq 0 ]; then
 		echo "OK"
 	else
