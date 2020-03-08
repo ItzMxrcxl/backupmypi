@@ -48,7 +48,8 @@ cp ressources/usr/bin/backupmypi/* /usr/bin/backupmypi/
 echo "Copy Programm"
 cp ressources/bin/* /bin/
 
-if [[ updated_config = "true" ]]; then
+. /usr/bin/backupmypi/update.notes
+if [[ update_config = "true" ]]; then
 	echo -e 'WARNING: new config file has been added, please check configuration!'
 	cp /usr/bin/backupmypi/config.txt /usr/bin/backupmypi/config.txt.bak
 	echo "a backup of the configuration has been created. /usr/bin/backupmypi/config.txt.bak"
@@ -64,6 +65,8 @@ chown pi:pi /usr/bin/backupmypi #Give folder to user Pi
 chmod 770 /usr/bin/backupmypi
 chmod +x /bin/backup
 chmod +x /usr/bin/backupmypi/*
+echo "cleanup"
+rm /usr/bin/backupmypi/update.notes
 echo "finish."
 if [ $msg_config_created = true ]; then
 	echo "Config file has been freshly created, please check!"
