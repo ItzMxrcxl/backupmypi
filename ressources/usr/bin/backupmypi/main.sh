@@ -42,25 +42,27 @@ backup() (
 		echo "ERROR: Backup Ordner "$backup_path" exisitert nicht, Ist das Speichergerät mounted?"
 		exit 1
 	fi
-	if [ ! -f $BOOT ]; then
+	test -e $BOOT
+	if [ ! $?=0 ]; then
 		echo "Backup Quelle "$BOOT" exisitert nicht! Bitte überprüfe Konfig Datei"
 		failed=1
 		exit 10
 	fi
 	echo "Starte Backup " $DATE_STARTED
-	a=$SECONDS #Start the second timer
+	a=$SECONDS #Start the timer
 	backup_file=$backup_path'/'$DATE_STARTED'.img' #the filename
-	#BOOT=`awk '$2 == "/"' /proc/self/mounts | sed 's/\s.*$//'`
-	echo "Erstelle Backup von " $BOOT ", speichere dies unter "$backup_file
-	if [ $compress_image = 'True' ]; then #if compress_image is in Config file True, execute zip
+	#BOOT=`awk '$2 == "/"' /proc/self/mounts | sed 's/\s.*$//'` #Get boot device with partition
+	if [ $compress_image = 'True' ]; then
+		echo "Erstelle Backup von " $BOOT ", speichere dies unter "$backup_file".gz"
 		zip
 	else
+		echo "Erstelle Backup von " $BOOT ", speichere dies unter "$backup_file
 		normal_backup
 	fi
 )
 
 zip() ( #Shrinking image while copying
-	echo "Backup wird wärend dem Backup zusätzlich gepackt."
+	echo "Backupdatei wird wärend dem Backup zusätzlich gepackt."
 	sudo dd if=$BOOT bs=16M status=progress | gzip -c  > $backup_file'.gz'
 )
 normal_backup() (
