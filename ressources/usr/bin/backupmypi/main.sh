@@ -43,6 +43,7 @@ backup() (
 	fi
 	if [ ! -f $BOOT ]; then
 		echo "Backup Quelle "$BOOT" exisitert nicht! Bitte überprüfe Konfig Datei"
+		failed=1
 		exit 10
 	fi
 	echo "Starte Backup " $DATE_STARTED
@@ -67,6 +68,9 @@ normal_backup() (
 
 output() (
 	duration=$SECONDS #Stop the timer
+	if [ $failed = 1 ]; then
+		exit 100
+	fi
 	echo "Das Backup wurde in $(($duration / 60)) Minuten und $(($duration % 60)) Sekunden erstellt." #Output the Timer
 )
 
