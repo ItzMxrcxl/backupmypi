@@ -25,9 +25,7 @@ self_update() {
 	echo "Prüfe updates..."
 	cd /usr/bin/backupmypi/
 	sudo bash updater.sh
-	if [ $? -eq 0 ]; then
-		pass
-	else
+	if [ ! $? -eq 0 ]; then
 		echo "Error! "$?
 	fi
 }
