@@ -16,7 +16,6 @@ check_connection() {
 		echo "could not estabalise a Connection"
 		exit 50
 	fi
-	exit 0
 }
 
 self_update() {
