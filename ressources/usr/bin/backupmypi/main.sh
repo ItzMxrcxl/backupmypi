@@ -13,13 +13,6 @@ then
 fi
 . /usr/bin/backupmypi/config.txt
 
-if [[ ! -f "/usr/bin/backupmypi/version" ]]
-then
-		echo "ERROR: Version Datei existiert nicht"
-		exit 3
-fi
-. /usr/bin/backupmypi/version
-
 DATE=$(date '+%Y-%m-%d_%H-%M-%S')
 
 #For logging
@@ -29,7 +22,7 @@ DATE=$(date '+%Y-%m-%d_%H-%M-%S')
 # exec 1>/tmp/bmp_$DATE.log 2>&1
 
 self_update() {
-	echo "Prüfe updates..-"
+	echo "Prüfe updates..."
 	cd /usr/bin/backupmypi/
 	sudo bash updater.sh
 	if [ $? -eq 0 ]; then
@@ -42,6 +35,7 @@ self_update() {
 main() ( #if you wana build a part in it, before the backup wil be executed.
 	backup
 )
+
 backup() (
 	DATE_STARTED=$(date '+%Y-%m-%d_%H-%M-%S')
 	a=$SECONDS #Start the second timer
