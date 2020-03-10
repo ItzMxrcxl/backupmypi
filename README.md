@@ -9,7 +9,7 @@ Das ist ganz einfach.
 
 Zuerst verbindest du dich deinem Pi und öffnest das Terminal (SSH geht auch). Danach ladest du dir die Git Repo herunter.
 
-    apt install git
+    sudo apt install git
     git clone https://github.com/ItzMxrcxl/backupmypi.git
 Nachdem es sich geklont hat, müssen wir in den Ordner gehen.
 
