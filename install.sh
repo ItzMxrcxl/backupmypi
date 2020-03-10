@@ -15,7 +15,7 @@ echo ""
 echo "First we make some Updates..."
 apt update -y && apt upgrade -y
 echo "Installing dependent Packages" #Begin Installation
-apt install -y git rsync gzip pv exfat-fuse exfat-utils cifs-utils
+apt install -y git rsync gzip pv exfat-fuse exfat-utils cifs-utils curlftpfs
 
 if [[ -d "/usr/bin/backupmypi" ]] ; then
 	GITHUB_VERSION=`curl --silent -H 'Cache-Control: no-cache' -o - https://raw.githubusercontent.com/ItzMxrcxl/backupmypi/master/ressources/usr/bin/backupmypi/version`
