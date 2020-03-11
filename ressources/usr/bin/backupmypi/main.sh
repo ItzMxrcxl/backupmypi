@@ -31,6 +31,7 @@ self_update() {
 }
 
 main() ( #if you wana build a part in it, before the backup wil be executed.
+	sudo mount $backup_mount_path
 	backup
 )
 
