@@ -49,7 +49,7 @@ backup() (
 	a=$SECONDS #Start the timer
 	backup_file=$backup_path'/'$backup_name'.img' #the filename
 	#BOOT=`awk '$2 == "/"' /proc/self/mounts | sed 's/\s.*$//'` #Get boot device with partition
-s	if [ $shrink_image = 'True' ]; then
+	if [ $shrink_image = 'True' ]; then
 		echo "Erstelle Backup von " $BOOT", speichere dies unter "$backup_file".gz"
 		if [ $compress_image = 'True' ]; then
 			echo "Erstelle Backup von " $BOOT", dies wird nach dem Kopieren verkleinert und gepackt."
