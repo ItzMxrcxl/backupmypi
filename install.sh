@@ -68,7 +68,6 @@ if [[ ! -f  "/usr/bin/backupmypi/config.txt" ]]; then
 	echo "Created Config file"
 fi
 echo "set permissions"
-chmod +x pishrink.sh
 chown pi:pi /usr/bin/backupmypi #Give folder to user Pi
 chmod 770 /usr/bin/backupmypi
 chmod +x /bin/backup
