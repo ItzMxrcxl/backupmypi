@@ -33,7 +33,7 @@ if [[ -d "/usr/bin/backupmypi" ]] ; then
 	fi
 fi
 
-echo "Copy files..." 
+echo "create envoirement"
 if [[ ! /usr/bin ]]; then
 	echo "Created folder /usr/bin/"
 	mkdir /usr/bin/
@@ -41,7 +41,15 @@ fi
 if [[ ! -d "/usr/bin/backupmypi/" ]]; then
 	echo "Created folder /usr/bin/backupmypi/"
 	mkdir /usr/bin/backupmypi/
+	mkdir /usr/bin/backupmypi/tmp
 fi
+
+echo "Download PiShrink"
+wget https://raw.githubusercontent.com/ItzMxrcxl/PiShrink/master/pishrink.sh
+echo "Installing PiShrink"
+sudo mv pishrink.sh /bin/pishrink
+chmod +x /bin/pishrink
+
 echo "Copy Programm data"
 cp ressources/usr/bin/backupmypi/* /usr/bin/backupmypi/
 echo "Copy Programm"
@@ -60,6 +68,7 @@ if [[ ! -f  "/usr/bin/backupmypi/config.txt" ]]; then
 	echo "Created Config file"
 fi
 echo "set permissions"
+chmod +x pishrink.sh
 chown pi:pi /usr/bin/backupmypi #Give folder to user Pi
 chmod 770 /usr/bin/backupmypi
 chmod +x /bin/backup

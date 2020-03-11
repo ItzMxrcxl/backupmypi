@@ -49,21 +49,37 @@ backup() (
 	a=$SECONDS #Start the timer
 	backup_file=$backup_path'/'$backup_name'.img' #the filename
 	#BOOT=`awk '$2 == "/"' /proc/self/mounts | sed 's/\s.*$//'` #Get boot device with partition
-	if [ $compress_image = 'True' ]; then
+s	if [ $shrink_image = 'True' ]; then
 		echo "Erstelle Backup von " $BOOT", speichere dies unter "$backup_file".gz"
-		zip
+		if [ $compress_image = 'True' ]; then
+			echo "Erstelle Backup von " $BOOT", dies wird nach dem Kopieren verkleinert und gepackt."
+			normal_backup
+			just_shrink
+		else
+			echo "Erstelle Backup von " $BOOT", speichere dies unter "$backup_file" , dies wird nach dem Kopieren verkleinert"
+			normal_backup
+			just_shrink
+		fi
 	else
-		echo "Erstelle Backup von " $BOOT", speichere dies unter "$backup_file
-		normal_backup
+		if [ $compress_image = 'True' ]; then
+			zip_copy
+		fi
 	fi
 )
 
-zip() ( #Shrinking image while copying
+zip_copy() ( #Shrinking image while copying
 	echo "Backupdatei wird wärend dem Backup zusätzlich gepackt."
 	sudo dd if=$BOOT conv=sparse bs=512 status=progress | gzip -c  > $backup_file'.gz'
 )
 normal_backup() (
 	sudo dd if=$BOOT of=$backup_file conv=sparse bs=512 status=progress
+)
+just_shrink() (
+	echo "Verkleinere Image"
+	sudo pishrink $backup_file
+)
+just_zip() (
+	gzip $backup_file $backup_file'.gz'
 )
 
 output() (
