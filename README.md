@@ -26,7 +26,7 @@ Nachdem der Installer erfolgreich ausgeführt wurde müssen wir die Konfiguratio
 
 ## Backup Ordner einhängen
 Das Tool installiert bei der Installation alle benötigten Pakete.
-### Wie Mounte ich ein Datenträger?
+### Wie Mounte ich ein Datenträger (Beispiel USB Stick)?
 
 Zuerst suchen wir den "Buchstaben" des Datenträgers. 
 Im Normalfall, wenn man einen Datenträger (USB-Stick) am Raspberry Pi eingesteckt hat, wird zu 99% der "Buchstabe" /dev/sda1 vergeben.
@@ -80,16 +80,23 @@ Wenn nun der Fehler...
     fsck.exfat /dev/***
 *Die Sternchen mit dem "Laufwerksbuchstaben" ersetzen*
 ### Wie Mounte ich ein Windows Share?
-[Mount Permanent](https://wiki.ubuntu.com/MountWindowsSharesPermanently)
-[Samba Cifs Client](https://wiki.ubuntuusers.de/Samba_Client_cifs/)
+
+Unter /etc/fstab folgende einträge ergänzen.
+//IP/SHARE /mnt/backup username=USER,password=PASS,dir_mode=0755,file_mode=0755,guid=1000,uid=1000,auto 0 0
+
+Dies vergibt dem Pi Benutzer Zugriff auf den Share.
+
+Danach erstellen wir den standart Backup Ordner
+sudo mkdir /mnt/backup/PiBackup
+
 ## Fehlerbehandlung
 
 > ERROR: Backup folder: xxxxx : doesnt exist, is the backup medium mounted? Try mounting the medium/share or create the backup folder.
 
 Zuerst überprüft man ob der Datenträger auf den das Backup geladen wird, eingehängt ist. Dies macht man mit dem Befehl
 
-    sudo df -h | grep /dev/***
-Wobei hier die Sternchen den "Laufwerksbuchstaben" ersetzen.
+    sudo df -h
+
 Wenn dies nicht der fall ist gehe zu "Wie Mounte ich ein Datenträger?"
 Wenn der Datenträger in diese Liste angezeigt wird, überprüfe ob der Pfad der in der config.txt eingetragen ist, auf dem Backup Datenträger existiert.
 Wenn der Ordner nicht existiert, erstelle diesen mit dem Befehl
