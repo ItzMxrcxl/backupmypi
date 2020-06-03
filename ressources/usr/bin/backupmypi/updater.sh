@@ -45,7 +45,7 @@ force_update() {
 	fi
 	cd /usr/bin/backupmypi/temp
 	GITHUB_VERSION=`curl --silent -H 'Cache-Control: no-cache' -o - https://raw.githubusercontent.com/ItzMxrcxl/backupmypi/master/ressources/usr/bin/backupmypi/version`
-	echo 'update the Script to (Github Version) ' $GITHUB_VERSION
+	echo 'update/install to (Github Version) ' $GITHUB_VERSION
 	git clone https://github.com/ItzMxrcxl/backupmypi.git
 	echo "Start install new Version..."
 	cd backupmypi

@@ -4,3 +4,4 @@ backup_mount_path=/mnt/backup
 backup_name=`hostname`_$(date '+%Y-%m-%d_%H-%M-%S') 
 shrink_image=True
 compress_image=True
+unmount_after_backup=False
